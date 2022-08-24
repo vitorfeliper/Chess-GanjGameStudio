@@ -89,19 +89,45 @@ int MovePiece(int lineOrigin, int colOrigin, int lineDestiny, int colDestiny)
         piece = chess[lineOrigin][colOrigin];
 
         ///Pieces limitations
-        if((piece == 'T' || piece == 't') && (verticalDisplacement == 0 || horizontalDisplacement == 0)) moove = 1;
-        if((piece == 'B' || piece == 'b') && (verticalDisplacement == horizontalDisplacement)) moove = 1;
-        if((piece == 'C' || piece == 'c') && ((verticalDisplacement == 1 && horizontalDisplacement == 2) || (verticalDisplacement == 2 && horizontalDisplacement == 1))) moove = 1;
-        if((piece == 'Q' || piece == 'q') && ((verticalDisplacement == horizontalDisplacement) || (verticalDisplacement == 0 || horizontalDisplacement == 0) ) ){ moove = 1; }
 
+        ///Tower
+        if((piece == 'T' || piece == 't') && (verticalDisplacement == 0 || horizontalDisplacement == 0)) moove = 1;
+
+        ///Bispo
+        if((piece == 'B' || piece == 'b') && (verticalDisplacement == horizontalDisplacement)) moove = 1;
+
+        ///Horse
+        if((piece == 'C' || piece == 'c') &&
+           ((verticalDisplacement == 1 && horizontalDisplacement == 2) ||
+            (verticalDisplacement == 2 && horizontalDisplacement == 1))) moove = 1;
+
+        ///Queen
+        if((piece == 'Q' || piece == 'q') &&
+           ((verticalDisplacement == horizontalDisplacement) ||
+            (verticalDisplacement == 0 || horizontalDisplacement == 0) ) ){ moove = 1; }
+
+        ///King
+        if((piece == 'K' || piece == 'k') &&
+           ((verticalDisplacement >= 0 && verticalDisplacement <= 1) &&
+            (horizontalDisplacement >= 0 && horizontalDisplacement <= 1) ) ){ moove = 1; }
+
+        ///Peons 'p'
+        if((piece == 'P') && ((lineDestiny - lineOrigin) == 1) && (horizontalDisplacement == 0) ) moove = 1;
+
+        ///Peons 'P'
+        if((piece == 'p') && ((lineOrigin - lineDestiny) == 1) && (horizontalDisplacement == 0) ) moove = 1;
 
         ///Pieces movement
         if(moove == 1)
         {
             chess[lineDestiny][colDestiny] = chess[lineOrigin][colOrigin];
             chess[lineOrigin][colOrigin] = ' ';
+            return 1;
         }
-        return 1;
+        else
+        {
+            return 9;
+        }
     }
     else
     {

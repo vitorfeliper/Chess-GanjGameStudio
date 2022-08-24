@@ -22,10 +22,15 @@ int main()
         printf("Line and col destiny: ");
         scanf("%d %d", &lineDestiny, &colDestiny);
 
-        if(MovePiece(lineOrigin, colOrigin, lineDestiny, colDestiny) != 1)
+        int result = MovePiece(lineOrigin, colOrigin, lineDestiny, colDestiny);
+        if(result != 1)
         {
-            system("cls");
-            printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n");
+            switch(result)
+            {
+            case 9 : printf("\n\n\nSYSTEM:[0xAB00] Piece dont can move this form");  getch(); break;
+            case 0 : printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n"); getch(); break;
+            case 1 : break;
+            }
             getch();
         }
     }
