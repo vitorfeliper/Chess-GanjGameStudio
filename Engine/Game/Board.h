@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <conio.h>
 
-
 ///Primary function to map v1.0
 char chess[8][8] =
 {

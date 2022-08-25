@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Engine/Core/SDL_CORE.h" />
 		<Unit filename="Engine/Core/main.cpp" />
 		<Unit filename="Engine/Game/Board.h" />
 		<Extensions>

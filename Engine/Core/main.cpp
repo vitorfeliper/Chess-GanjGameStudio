@@ -6,7 +6,7 @@
 */
 #include "../Game/Board.h"
 
-int main()
+int main(int argc, char** argv)
 {
     int lineOrigin = 0, lineDestiny = 0, colOrigin = 0, colDestiny = 0;
 
