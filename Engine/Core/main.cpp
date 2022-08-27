@@ -19,18 +19,20 @@ int main(int argc, char** argv)
     while(true)
     {
         RenderScreen();
-        printScreenText();
-        printf("\nUpercase = Black\nLowercase = White pieces\n");
+        CaptureEvents();
+        SDL_Delay(10);
+        //printScreenText();
+        ///printf("\nUpercase = Black\nLowercase = White pieces\n");
 
-        printf("Line and col origin(Piece coordinates): ");
-        scanf("%d %d", &lineOrigin, &colOrigin);
-        printf("\nPiece:%c\n", chess[lineOrigin][colOrigin]);
+        ///printf("Line and col origin(Piece coordinates): ");
+        ///scanf("%d %d", &lineOrigin, &colOrigin);
+        ///printf("\nPiece:%c\n", chess[lineOrigin][colOrigin]);
 
-        printf("Line and col destiny: ");
-        scanf("%d %d", &lineDestiny, &colDestiny);
+        ///printf("Line and col destiny: ");
+        ///scanf("%d %d", &lineDestiny, &colDestiny);
 
-        int result = MovePiece(lineOrigin, colOrigin, lineDestiny, colDestiny);
-
+        ///int result = MovePiece(lineOrigin, colOrigin, lineDestiny, colDestiny);
+    /*
         if(result != 1)
         {
             system("cls");
@@ -43,6 +45,7 @@ int main(int argc, char** argv)
             printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n");
             getch();
         }
+        */
     }
     return 0;
 }

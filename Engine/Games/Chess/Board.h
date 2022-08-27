@@ -32,20 +32,22 @@ char chess[8][8] =
 
 SDL_Texture *images[12];
 char nameImages[][50] =
-{ "BB.png",
+{
   "BW.png",
-  "HB.png",
+  "BB.png",
   "HW.png",
-  "KB.png",
+  "HB.png",
   "KW.png",
-  "PB.png",
-  "PW.png",
-  "QB.png",
+  "KB.png",
   "QW.png",
-  "TB.png",
-  "TW.png"
+  "QB.png",
+  "PW.png",
+  "PB.png",
+  "TW.png",
+  "TB.png"
 };
 
+char pieces[] = { 'b', 'B', 'c', 'C', 'k', 'K', 'q', 'Q', 'p', 'P', 't', 'T' };
 void LoadImages()
 {
     if(IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG)
@@ -55,7 +57,7 @@ void LoadImages()
         for(i = 0; i < 12; i++)
         {
             char nameIMG[50] = "Assets/";
-            strcpy(nameIMG, nameImages[i]);
+            strcat(nameIMG, nameImages[i]);
             printf("[ENGINE]: Image : %s\n", nameIMG);
             SDL_Surface *surImage = IMG_Load(nameIMG);
             images[i]  = SDL_CreateTextureFromSurface(render, surImage);
@@ -64,7 +66,7 @@ void LoadImages()
     }
     else
     {
-
+        printf("[SYSTEM]Images not loaded!!!");
     }
 }
 
@@ -73,7 +75,7 @@ void InitializeGraphics()
     if(SDL_Init(SDL_INIT_EVERYTHING) >= 0)
     {
         printf("\nSDL has been initialized...");
-        window = SDL_CreateWindow("GGE C H E S S", WIDTH/2, HEIGHT/2, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow("GGE C H E S S", 50, 50, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
         if(window != null)
         {
             printf("\nWindow has been initialized with success\n");
@@ -98,6 +100,19 @@ void InitializeGraphics()
     }
 }
 
+SDL_Texture *ImageFromPiece(char piece)
+{
+    int i;
+
+    for(i = 0; i < 12; i++)
+    {
+        if (pieces[i] == piece)
+        {
+            return images[i];
+        }
+    }
+}
+
 void RenderScreen()
 {
     int line,
@@ -114,11 +129,11 @@ void RenderScreen()
         {
             if((col + line) % 2 == 0)
             {
-                SDL_SetRenderDrawColor(render, 0, 0, 0, 255); ///Black Color
+                SDL_SetRenderDrawColor(render, 0, 191, 255, 255); ///Black Color
             }
             else
             {
-                SDL_SetRenderDrawColor(render, 255, 255, 0, 255); ///Yellow Color
+                SDL_SetRenderDrawColor(render, 255, 255, 255, 255); ///Yellow Color
             }
 
             int x = col * w, y = line * h;
@@ -126,6 +141,21 @@ void RenderScreen()
             SDL_Rect rectangle = {x, y, w, h};
 
             SDL_RenderFillRect(render, &rectangle);
+
+            char p = chess[line][col];
+
+            if (p != ' ')
+            {
+                int wOrigin, hOrigin;
+
+                SDL_Texture *img = ImageFromPiece(p);
+
+                SDL_QueryTexture(img, null, null, &wOrigin, &hOrigin);
+
+                SDL_Rect rectangleOrigin = {0, 0, wOrigin, hOrigin};
+
+                SDL_RenderCopy(render, img, &rectangleOrigin, &rectangle);
+            }
         }
     }
 
@@ -223,6 +253,24 @@ int MovePiece(int lineOrigin, int colOrigin, int lineDestiny, int colDestiny)
         return 0;
     }
 
+}
+
+void CaptureEvents()
+{
+    int e = SDL_PollEvent(&event);
+
+    if(event.type == SDL_QUIT)
+    {
+        exit(0);
+    }
+    else if(event.type == SDL_MOUSEMOTION)
+    {
+        //printf("X : %d, Y : %d \n", event.motion.x, event.motion.y);
+    }
+    else if(event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        printf("X : %d, Y : %d \n", event.motion.x, event.motion.y);
+    }
 }
 
 
