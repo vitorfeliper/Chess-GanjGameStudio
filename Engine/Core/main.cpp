@@ -4,14 +4,20 @@
     piece name improvment --> to v1.1 current version v1.0
 
 */
-#include "../Game/Board.h"
+#include <iostream>
+#include "../Games/Chess/Board.h"
 
 int main(int argc, char** argv)
 {
+    InitializeGraphics();
+    LoadImages();
+    getch();
+    std::cout << "GanjGameEngine Welcome" << std::endl;
     int lineOrigin = 0, lineDestiny = 0, colOrigin = 0, colDestiny = 0;
 
     while(true)
     {
+        RenderScreen();
         printScreenText();
         printf("\nUpercase = Black\nLowercase = White pieces\n");
 
@@ -23,17 +29,19 @@ int main(int argc, char** argv)
         scanf("%d %d", &lineDestiny, &colDestiny);
 
         int result = MovePiece(lineOrigin, colOrigin, lineDestiny, colDestiny);
+
         if(result != 1)
         {
+            system("cls");
             switch(result)
             {
-            case 9 : printf("\n\n\nSYSTEM:[0xAB00] Piece dont can move this form");  getch(); break;
-            case 0 : printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n"); getch(); break;
-            case 1 : break;
+                case 9 : printf("\n\n\nSYSTEM:[0xAB00] Invalid(PIECE) entrances!!\nPress any key to continue...\n"); getch(); break;
+                case 0 : printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n"); getch(); break;
+                case 1 : break;
             }
+            printf("\n\n\nSYSTEM:[0xAB01] Invalid entrances!!\nPress any key to continue...\n");
             getch();
         }
     }
-	getch();
     return 0;
 }

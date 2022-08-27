@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1661515523 source:c:\users\7483724\desktop\gge\ganjgameengine\main.cpp
+	<iostream>
+	"SDL.h"
+
+1661522269 source:c:\users\7483724\desktop\gge\ganjgameengine\engine\core\main.cpp
+	<iostream>
+	"../Games/Chess/Board.h"
+
+1661522445 c:\users\7483724\desktop\gge\ganjgameengine\engine\games\chess\board.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<conio.h>
+
+1661522269 source:c:\users\7483724\desktop\copy\gge\ganjgameengine\engine\core\main.cpp
+	<iostream>
+	"../Games/Chess/Board.h"
+
+1661523903 c:\users\7483724\desktop\copy\gge\ganjgameengine\engine\games\chess\board.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<conio.h>
+
