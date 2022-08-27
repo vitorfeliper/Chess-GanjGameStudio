@@ -10,6 +10,7 @@
 
 void Game()
 {
+    ChessIntroAnim();
     system("color 7");
     InitializeGraphics();
     LoadImages();

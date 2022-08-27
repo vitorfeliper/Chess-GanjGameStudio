@@ -27,16 +27,19 @@
 	<stdlib.h>
 	<conio.h>
 
-1661621267 source:d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\core\main.cpp
+1661622333 source:d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\core\main.cpp
 	<iostream>
-	<windows.h>
+	"TextAnimation.h"
 	"../Games/Chess/Board.h"
 
-1661621335 d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\games\chess\board.h
+1661621353 d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\games\chess\board.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	<conio.h>
+
+1661622575 d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\core\textanimation.h
+	<windows.h>
 
