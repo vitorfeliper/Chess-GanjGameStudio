@@ -11,7 +11,8 @@ int main(int argc, char** argv)
 {
     InitializeGraphics();
     LoadImages();
-    getch();
+    ///getch();
+    system("Pause");
     std::cout << "GanjGameEngine Welcome" << std::endl;
     int lineOrigin = 0, lineDestiny = 0, colOrigin = 0, colDestiny = 0;
 

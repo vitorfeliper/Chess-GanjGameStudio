@@ -27,3 +27,15 @@
 	<stdlib.h>
 	<conio.h>
 
+1661507868 source:d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\core\main.cpp
+	<iostream>
+	"../Games/Chess/Board.h"
+
+1661509502 d:\______ganjgamestudios\chessgame\chess-ganjgamestudio\engine\games\chess\board.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<conio.h>
+
