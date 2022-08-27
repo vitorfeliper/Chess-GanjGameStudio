@@ -302,7 +302,7 @@ void CaptureEvents()
             colOfOrigin = -1;
         }
 
-        printf("Line : %d  Col : %d\n", line, col);
+        //printf("Line : %d  Col : %d\n", line, col);
     }
 }
 
