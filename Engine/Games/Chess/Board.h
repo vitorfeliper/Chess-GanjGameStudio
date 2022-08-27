@@ -48,6 +48,9 @@ char nameImages[][50] =
 };
 
 char pieces[] = { 'b', 'B', 'c', 'C', 'k', 'K', 'q', 'Q', 'p', 'P', 't', 'T' };
+
+int lineOfOrigin = -1, colOfOrigin = -1;
+
 void LoadImages()
 {
     if(IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG)
@@ -111,6 +114,8 @@ SDL_Texture *ImageFromPiece(char piece)
             return images[i];
         }
     }
+
+    return 0;
 }
 
 void RenderScreen()
@@ -129,14 +134,14 @@ void RenderScreen()
         {
             if((col + line) % 2 == 0)
             {
-                SDL_SetRenderDrawColor(render, 0, 191, 255, 255); ///Black Color
+                SDL_SetRenderDrawColor(render, 0, 191, 255, 255); ///White Color
             }
             else
             {
-                SDL_SetRenderDrawColor(render, 255, 255, 255, 255); ///Yellow Color
+                SDL_SetRenderDrawColor(render, 255, 255, 255, 255); ///Cian Color
             }
 
-            int x = col * w, y = line * h;
+            int x = (col * w), y = (line * h);
 
             SDL_Rect rectangle = {x, y, w, h};
 
@@ -155,6 +160,12 @@ void RenderScreen()
                 SDL_Rect rectangleOrigin = {0, 0, wOrigin, hOrigin};
 
                 SDL_RenderCopy(render, img, &rectangleOrigin, &rectangle);
+            }
+
+            if(lineOfOrigin == line && colOfOrigin == col)
+            {
+                SDL_SetRenderDrawColor(render, 0, 128, 0, 255); ///Green Color
+                SDL_RenderDrawRect(render, &rectangle);
             }
         }
     }
@@ -223,7 +234,8 @@ int MovePiece(int lineOrigin, int colOrigin, int lineDestiny, int colDestiny)
     if
     (
         (lineOrigin >= 0 && lineOrigin < 8 && colOrigin >= 0 && colOrigin < 8) &&
-        (lineDestiny >= 0 && lineDestiny < 8 && colDestiny >= 0 && colDestiny < 8)
+        (lineDestiny >= 0 && lineDestiny < 8 && colDestiny >= 0 && colDestiny < 8) &&
+        (verticalDisplacement + horizontalDisplacement > 0)
     )
     {
         piece = chess[lineOrigin][colOrigin];
@@ -233,6 +245,7 @@ int MovePiece(int lineOrigin, int colOrigin, int lineDestiny, int colDestiny)
         if((piece == 'B' || piece == 'b') && (verticalDisplacement == horizontalDisplacement)) moove = 1;
         if((piece == 'C' || piece == 'c') && ((verticalDisplacement == 1 && horizontalDisplacement == 2) || (verticalDisplacement == 2 && horizontalDisplacement == 1))) moove = 1;
         if((piece == 'Q' || piece == 'q') && ((verticalDisplacement == horizontalDisplacement) || (verticalDisplacement == 0 || horizontalDisplacement == 0) ) ){ moove = 1; }
+        if((piece == 'K' || piece == 'k') && ((verticalDisplacement >= 0 && verticalDisplacement <= 1) && (horizontalDisplacement >= 0 && horizontalDisplacement <= 1) ) ){ moove = 1; }
         if((piece == 'P') && ((lineDestiny - lineOrigin) == 1 && (horizontalDisplacement == 0))) moove = 1;
         if((piece == 'p') && ((lineOrigin - lineDestiny) == 1 && (horizontalDisplacement == 0))) moove = 1;
 
@@ -269,7 +282,27 @@ void CaptureEvents()
     }
     else if(event.type == SDL_MOUSEBUTTONDOWN)
     {
-        printf("X : %d, Y : %d \n", event.motion.x, event.motion.y);
+        int w = WIDTH / 8;
+        int h = HEIGHT / 8;
+
+        ///printf("X : %d, Y : %d \n", event.motion.x, event.motion.y);
+
+        int col = event.motion.x / w;
+        int line = event.motion.y / h;
+
+        if(lineOfOrigin == -1)
+        {
+            lineOfOrigin = line;
+            colOfOrigin = col;
+        }
+        else
+        {
+            MovePiece(lineOfOrigin, colOfOrigin, line, col);
+            lineOfOrigin = -1;
+            colOfOrigin = -1;
+        }
+
+        printf("Line : %d  Col : %d\n", line, col);
     }
 }
 
